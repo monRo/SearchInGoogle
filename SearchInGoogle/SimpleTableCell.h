@@ -11,5 +11,6 @@
 @interface SimpleTableCell : UITableViewCell
 @property (weak, nonatomic) IBOutlet UILabel *titleLabel;
 @property (weak, nonatomic) IBOutlet UILabel *contextLabel;
+@property (weak, nonatomic) IBOutlet UILabel *wwwLable;
 
 @end

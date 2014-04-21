@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDESourceControlProjectFavoriteDictionaryKey</key>
+	<false/>
+	<key>IDESourceControlProjectIdentifier</key>
+	<string>1DA06885-D7E9-4F72-83BD-681A3BDAFA8C</string>
+	<key>IDESourceControlProjectName</key>
+	<string>SearchInGoogle</string>
+	<key>IDESourceControlProjectOriginsDictionary</key>
+	<dict>
+		<key>0A171EAF-0822-4B97-9BD2-973AC91D425F</key>
+		<string>https://github.com/monRo/SearchInGoogle.git</string>
+	</dict>
+	<key>IDESourceControlProjectPath</key>
+	<string>SearchInGoogle.xcodeproj/project.xcworkspace</string>
+	<key>IDESourceControlProjectRelativeInstallPathDictionary</key>
+	<dict>
+		<key>0A171EAF-0822-4B97-9BD2-973AC91D425F</key>
+		<string>../..</string>
+	</dict>
+	<key>IDESourceControlProjectURL</key>
+	<string>https://github.com/monRo/SearchInGoogle.git</string>
+	<key>IDESourceControlProjectVersion</key>
+	<integer>110</integer>
+	<key>IDESourceControlProjectWCCIdentifier</key>
+	<string>0A171EAF-0822-4B97-9BD2-973AC91D425F</string>
+	<key>IDESourceControlProjectWCConfigurations</key>
+	<array>
+		<dict>
+			<key>IDESourceControlRepositoryExtensionIdentifierKey</key>
+			<string>public.vcs.git</string>
+			<key>IDESourceControlWCCIdentifierKey</key>
+			<string>0A171EAF-0822-4B97-9BD2-973AC91D425F</string>
+			<key>IDESourceControlWCCName</key>
+			<string>SearchInGoogle</string>
+		</dict>
+	</array>
+</dict>
+</plist>

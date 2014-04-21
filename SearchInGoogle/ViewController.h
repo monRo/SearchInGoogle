@@ -8,15 +8,18 @@
 
 #import <UIKit/UIKit.h>
 
-@interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource> 
+@interface ViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @property (strong, nonatomic) IBOutlet UITextField *searchTextField;
 
 - (IBAction)searthButton:(UIBarButtonItem *)sender;
 
-@property (weak, nonatomic) NSMutableArray *url;
-@property (weak, nonatomic) NSMutableArray *titleUrl;
-@property (weak, nonatomic) NSMutableArray *context;
+@property (strong, nonatomic) NSMutableArray *url;
+@property (strong, nonatomic) NSMutableArray *titleUrl;
+@property (strong, nonatomic) NSMutableArray *context;
+
+-(NSString *)replacement:(NSString *)replacingString;
 
 @end
