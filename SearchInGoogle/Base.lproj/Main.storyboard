@@ -83,7 +83,11 @@
                     </view>
                     <navigationItem key="navigationItem" id="5ig-uV-qG8">
                         <nil key="title"/>
-                        <barButtonItem key="leftBarButtonItem" systemItem="trash" id="mDT-RY-bAz"/>
+                        <barButtonItem key="leftBarButtonItem" systemItem="trash" id="mDT-RY-bAz">
+                            <connections>
+                                <action selector="deleteButton:" destination="vXZ-lx-hvc" id="Xi0-U2-juB"/>
+                            </connections>
+                        </barButtonItem>
                         <textField key="titleView" opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="What you want?" minimumFontSize="17" id="DPX-r9-hWy">
                             <rect key="frame" x="57" y="7" width="206" height="30"/>
                             <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>

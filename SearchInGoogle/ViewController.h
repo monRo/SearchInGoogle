@@ -13,6 +13,7 @@
 @property (strong, nonatomic) IBOutlet UITableView *tableView;
 
 @property (strong, nonatomic) IBOutlet UITextField *searchTextField;
+- (IBAction)deleteButton:(UIBarButtonItem *)sender;
 
 - (IBAction)searthButton:(UIBarButtonItem *)sender;
 

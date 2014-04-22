@@ -16,6 +16,8 @@
 
 @interface ViewController ()
 
+@property (strong) NSMutableArray *coreDataArray;
+
 @end
 
 @implementation ViewController
@@ -29,6 +31,32 @@
     self.context = [[NSMutableArray alloc] init];
     
     self.titleUrl = [[NSMutableArray alloc] init];
+    
+    // Fetch the devices from persistent data store
+    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
+//    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] initWithEntityName:@"History"];
+//    self.coreDataArray = [[managedObjectContext executeFetchRequest:fetchRequest error:nil] mutableCopy];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity =[NSEntityDescription entityForName:@"History" inManagedObjectContext:managedObjectContext];
+    [fetchRequest setEntity:entity];
+    NSError *error = nil;
+    NSArray *fetchedObject = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    for (NSManagedObject *object in fetchedObject) {
+        NSLog(@"url %@", [object valueForKey:@"url"]);
+        NSLog(@"title %@", [object valueForKey:@"titleUrl"]);
+        NSLog(@"context %@", [object valueForKey:@"context"]);
+
+        NSString *doneString = [object valueForKey:@"url"];
+        [self.context addObject:doneString];
+        
+        NSString *urlStr = [object valueForKey:@"titleUrl"];
+        [self.url addObject:urlStr];
+        
+        NSString *titleUrlStr = [object valueForKey:@"context"];
+        [self.titleUrl addObject:titleUrlStr];
+    }
+    
+    [self.tableView reloadData];
 }
 
 - (void)didReceiveMemoryWarning
@@ -68,6 +96,28 @@
     cell.wwwLable.text = [self.url objectAtIndex:indexPath.row];
     
     return cell;
+}
+
+#pragma mark - Button method
+- (IBAction)deleteButton:(UIBarButtonItem *)sender {
+    NSManagedObjectContext *managedObjectContext = [self managedObjectContext];
+    NSFetchRequest *fetchRequest = [[NSFetchRequest alloc] init];
+    NSEntityDescription *entity =[NSEntityDescription entityForName:@"History" inManagedObjectContext:managedObjectContext];
+    [fetchRequest setEntity:entity];
+    
+    NSError *error;
+    NSArray *fetchedObject = [managedObjectContext executeFetchRequest:fetchRequest error:&error];
+    
+    for (NSManagedObject *managedObject in fetchedObject) {
+    	[managedObjectContext deleteObject:managedObject];
+    }
+    if (![managedObjectContext save:&error]) {
+    	NSLog(@"Error deleting");
+    }
+    [self.context removeAllObjects];
+    [self.url removeAllObjects];
+    [self.titleUrl removeAllObjects];
+    [self.tableView reloadData];
 }
 
 - (IBAction)searthButton:(UIBarButtonItem *)sender {
@@ -119,7 +169,24 @@
         NSString *titleUrlStr = [search objectForKey:@"titleNoFormatting"];
 //        NSLog(@"%@", titleUrlStr);
         [self.titleUrl addObject:titleUrlStr];
+        
+        // Core Data
+        NSManagedObjectContext *context = [self managedObjectContext];
+        
+        // Create a new managed object
+        NSManagedObject *newSearch = [NSEntityDescription insertNewObjectForEntityForName:@"History" inManagedObjectContext:context];
+        [newSearch setValue:doneString forKey:@"context"];
+        [newSearch setValue:urlStr forKey:@"url"];
+        [newSearch setValue:titleUrlStr forKey:@"titleUrl"];
+        
+        NSError *error = nil;
+        // Save the object to persistent store
+        if (![context save:&error]) {
+            NSLog(@"Can't Save! %@ %@", error, [error localizedDescription]);
+        }
+        // End Core Data
     }
+    
     [self.tableView reloadData];
 }
 
@@ -162,4 +229,15 @@
     
     return modifiedString;
 }
+
+#pragma mark - Core Data
+- (NSManagedObjectContext *)managedObjectContext {
+    NSManagedObjectContext *context = nil;
+    id delegate = [[UIApplication sharedApplication] delegate];
+    if ([delegate performSelector:@selector(managedObjectContext)]) {
+        context = [delegate managedObjectContext];
+    }
+    return context;
+}
+
 @end
